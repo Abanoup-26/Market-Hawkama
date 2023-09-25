@@ -1,0 +1,172 @@
+/* Font Family */
+@font-face {
+    font-family: "t_b";
+    src: url("../fonts/t_b.ttf");
+  }
+
+  /* Font Family */
+@font-face {
+    font-family: "t_r";
+    src: url("../fonts/t_r.ttf");
+  }
+
+body, p, span, input, select, textarea, a {
+    font-family: "t_r" !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "t_b" !important;
+}
+
+section.slider-area {
+    direction: ltr;
+}
+
+.header-top-left ul li + li {
+    margin-left: 0;
+    margin-right: 50px;
+}
+
+.header-top-right .login > a {
+    margin-right: 45px;
+}
+
+.navbar-wrap ul li .submenu li {
+    text-align: right;
+}
+
+.slider-content {
+    text-align: right;
+    width: 50%;
+    float: right;
+}
+
+.navbar-wrap ul li a {
+    padding: 35px 16px;
+}
+
+.header-style-one .sticky-menu .menu-nav.show .logo {
+    margin-left: 30px;
+}
+
+.navbar-wrap ul li .submenu li {
+    margin-right: 0px;
+}
+
+.navbar-wrap {
+    display: inherit;
+    flex-grow: 1;
+}
+
+.header-top-wrap {
+    padding: 5px 0;
+}
+
+.slider-content h6 i {
+    margin-left: 8px;
+    float: right;
+    margin-right: 0;
+    color: #ba9a56;
+}
+
+.counter-item-two .count::before, .counter-item .counter-content .count::before {
+    content: inherit !important;
+}
+
+.counter-item-two .count, .counter-item .counter-content .count {
+    direction: initial;
+}
+
+.cta-bg {
+    background-image: url(../img/bg/cta_bg.jpg);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-color: #001D23;
+    position: relative;
+    z-index: 1;
+    background-position: 100% 0px;
+    padding: 100px 0;
+    background-blend-mode: soft-light;
+}
+
+.cta-bg::before {
+    content: inherit !important;
+}
+
+@media (max-width: 1500px) {
+.cta-img {
+    margin-left: 0;
+    margin-right: -95px;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.newsletter-form form button {
+    left: 8px;
+    right: auto;
+}
+
+.newsletter-form form input {
+    border: 2px solid #001d23;
+}
+
+.newsletter-form form input {
+    padding: 22px 30px 22px 40px;
+    text-align: right;
+}
+
+.footer-contact-list ul li .icon {
+    margin-left: 20px;
+    margin-right: 0;
+}
+
+.footer-widget .footer-blog .thumb {
+    margin-right: 0;
+    margin-left: 20px;
+}
+
+.footer-widget .footer-link ul li a::before {
+    left: auto;
+    right: 0;
+}
+
+.footer-widget .footer-link ul li a {
+    padding-left: 0px;
+    padding-right: 20px;
+}
+
+.project-area2 {
+    background: #f8f8f89c;
+}
+
+.blog-content {
+    min-height: 190px;
+}
+
+.menu-area .mobile-nav-toggler {
+    float: left;
+}
+
+.mobile-menu .navigation li.dropdown .dropdown-btn {
+    left: 15px;
+    right: auto;
+    font-size: 9px;
+}

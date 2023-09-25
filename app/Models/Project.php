@@ -85,4 +85,20 @@ class Project extends Model implements HasMedia
     {
         return $this->getMedia('file')->last();
     }
+
+    public function getRatePercentageAttribute()
+    {
+        if ($this->goal > 0) {
+            // Calculate the rate 
+            $rate = ($this->collected / $this->goal) * 100;  
+            // Ensure the rate is within the range 0 to 100
+            $rate = min(100, max(0, $rate));
+            
+            return round($rate, 2); // Round the percentage to 2 decimal places
+        }
+        
+        return 0; 
+    }
+
+    
 }
