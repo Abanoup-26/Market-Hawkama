@@ -76,7 +76,7 @@
                         <div class="text-end">
                             <div class="login"><a href="{{ route('frontend.cart.index') }}"><img
                                         src="{{ asset('frontend/img/shopping-cart.png') }}" alt="">
-                                    <div class="cart-counter">0</div>
+                                    <div class="cart-counter">@yield('cart-count')</div>
                                 </a>
                             </div>
                         </div>
@@ -151,8 +151,8 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="footer-widget wow fadeInUp" data-wow-delay=".2s">
                                 <div class="fw-logo mb-30">
-                                    <a href="{{ route('frontend.home') }}"><img
-                                            src="{{ $about->logo[0]->getUrl() }}" alt=""></a>
+                                    <a href="{{ route('frontend.home') }}"><img src="{{ $about->logo->getUrl() }}"
+                                            alt=""></a>
                                 </div>
                                 <div class="footer-contact-list mb-30">
                                     <ul>

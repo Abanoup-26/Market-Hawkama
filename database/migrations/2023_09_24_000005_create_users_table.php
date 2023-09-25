@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->boolean('approved')->default(0)->nullable();
             $table->string('remember_token')->nullable();
             $table->string('user_type')->nullable();
-            $table->string('phone_number')->nullable();
+            $table->string('phone_number')->nullable()->unique();
             $table->timestamps();
             $table->softDeletes();
         });

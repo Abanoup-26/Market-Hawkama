@@ -1,4 +1,11 @@
 @extends('layouts.frontend')
+@php
+    $cartprojects = session('cart', []);
+    $cart_count = count($cartprojects);
+@endphp
+@section('cart-count')
+    {{ $cart_count }}
+@endsection
 @section('content')
     <!-- breadcrumb-area -->
     <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/breadcrumb_bg.jpg') }}">
@@ -30,7 +37,7 @@
                 @endforeach
             </div>
             <!-- Pagination Links -->
-            @includeIf('partials.pagination')
+            @include('partials.pagination')
             <!-- End Pagination Links -->
         </div>
     </section>

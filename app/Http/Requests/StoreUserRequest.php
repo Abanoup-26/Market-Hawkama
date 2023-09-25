@@ -37,7 +37,8 @@ class StoreUserRequest extends FormRequest
             ],
             'phone_number' => [
                 'string',
-                'nullable',
+                'required',
+                'unique:users',
             ],
         ];
     }

@@ -18,10 +18,6 @@ class StoreAboutRequest extends FormRequest
     {
         return [
             'logo' => [
-                'array',
-                'required',
-            ],
-            'logo.*' => [
                 'required',
             ],
             'phone' => [

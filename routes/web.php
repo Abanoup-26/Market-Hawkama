@@ -36,7 +36,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // About
     Route::post('abouts/media', 'AboutController@storeMedia')->name('abouts.storeMedia');
     Route::post('abouts/ckmedia', 'AboutController@storeCKEditorImages')->name('abouts.storeCKEditorImages');
-    Route::resource('abouts', 'AboutController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+    Route::resource('abouts', 'AboutController', ['except' => ['create', 'store', 'show', 'destroy']]);
 
     // Projects
     Route::delete('projects/destroy', 'ProjectsController@massDestroy')->name('projects.massDestroy');

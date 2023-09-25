@@ -18,10 +18,6 @@ class UpdateAboutRequest extends FormRequest
     {
         return [
             'logo' => [
-                'array',
-                'required',
-            ],
-            'logo.*' => [
                 'required',
             ],
             'phone' => [

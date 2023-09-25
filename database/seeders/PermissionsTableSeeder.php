@@ -104,70 +104,74 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 24,
-                'title' => 'about_access',
+                'title' => 'about_edit',
             ],
             [
                 'id'    => 25,
-                'title' => 'project_create',
+                'title' => 'about_access',
             ],
             [
                 'id'    => 26,
-                'title' => 'project_edit',
+                'title' => 'project_create',
             ],
             [
                 'id'    => 27,
-                'title' => 'project_show',
+                'title' => 'project_edit',
             ],
             [
                 'id'    => 28,
-                'title' => 'project_delete',
+                'title' => 'project_show',
             ],
             [
                 'id'    => 29,
-                'title' => 'project_access',
+                'title' => 'project_delete',
             ],
             [
                 'id'    => 30,
-                'title' => 'subscribe_create',
+                'title' => 'project_access',
             ],
             [
                 'id'    => 31,
-                'title' => 'subscribe_edit',
+                'title' => 'subscribe_create',
             ],
             [
                 'id'    => 32,
-                'title' => 'subscribe_show',
+                'title' => 'subscribe_edit',
             ],
             [
                 'id'    => 33,
-                'title' => 'subscribe_delete',
+                'title' => 'subscribe_show',
             ],
             [
                 'id'    => 34,
-                'title' => 'subscribe_access',
+                'title' => 'subscribe_delete',
             ],
             [
                 'id'    => 35,
-                'title' => 'payment_create',
+                'title' => 'subscribe_access',
             ],
             [
                 'id'    => 36,
-                'title' => 'payment_edit',
+                'title' => 'payment_create',
             ],
             [
                 'id'    => 37,
-                'title' => 'payment_show',
+                'title' => 'payment_edit',
             ],
             [
                 'id'    => 38,
-                'title' => 'payment_delete',
+                'title' => 'payment_show',
             ],
             [
                 'id'    => 39,
-                'title' => 'payment_access',
+                'title' => 'payment_delete',
             ],
             [
                 'id'    => 40,
+                'title' => 'payment_access',
+            ],
+            [
+                'id'    => 41,
                 'title' => 'profile_password_edit',
             ],
         ];

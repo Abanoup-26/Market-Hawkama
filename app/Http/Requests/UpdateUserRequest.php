@@ -34,7 +34,8 @@ class UpdateUserRequest extends FormRequest
             ],
             'phone_number' => [
                 'string',
-                'nullable',
+                'required',
+                'unique:users,phone_number,' . request()->route('user')->id,
             ],
         ];
     }
