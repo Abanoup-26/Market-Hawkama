@@ -201,8 +201,6 @@ return [
             'id_helper'              => ' ',
             'user'                   => 'User',
             'user_helper'            => ' ',
-            'project'                => 'Project',
-            'project_helper'         => ' ',
             'payment_orderid'        => 'Payment Orderid',
             'payment_orderid_helper' => ' ',
             'donation_num'           => 'Donation Num',
@@ -221,6 +219,8 @@ return [
             'deleted_at_helper'      => ' ',
             'completed'              => 'Completed',
             'completed_helper'       => ' ',
+            'project'                => 'Project',
+            'project_helper'         => ' ',
         ],
     ],
 

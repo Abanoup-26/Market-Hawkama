@@ -57,7 +57,7 @@ class CartController extends Controller
     // add data to session 
     session()->put('cart', $cart);
 
-    return redirect()->route('frontend.home');
+    return redirect()->route('frontend.cart.index');
 }
 
     // remove from cart

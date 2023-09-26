@@ -22,7 +22,7 @@ class Supporter
         } 
         else
         {
-            return redirect('/');
+            return redirect('/login');
         }
     }
 }

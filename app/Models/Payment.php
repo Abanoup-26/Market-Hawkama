@@ -32,7 +32,6 @@ class Payment extends Model
 
     protected $fillable = [
         'user_id',
-        'project_id',
         'payment_orderid',
         'donation_num',
         'donation',
@@ -54,8 +53,9 @@ class Payment extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function project()
+    public function projects()
     {
-        return $this->belongsTo(Project::class, 'project_id');
+        return $this->belongsToMany(Project::class, 'payment_project')
+            ->withPivot('donation_amount'); 
     }
 }

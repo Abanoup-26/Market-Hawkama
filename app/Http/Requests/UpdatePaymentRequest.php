@@ -21,10 +21,6 @@ class UpdatePaymentRequest extends FormRequest
                 'required',
                 'integer',
             ],
-            'project_id' => [
-                'required',
-                'integer',
-            ],
             'payment_orderid' => [
                 'string',
                 'nullable',
@@ -38,6 +34,12 @@ class UpdatePaymentRequest extends FormRequest
             ],
             'payment_type' => [
                 'required',
+            ],
+            'projects.*' => [
+                'integer',
+            ],
+            'projects' => [
+                'array',
             ],
         ];
     }

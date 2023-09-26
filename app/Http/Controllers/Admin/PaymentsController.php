@@ -21,7 +21,7 @@ class PaymentsController extends Controller
         abort_if(Gate::denies('payment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Payment::with(['user', 'project'])->select(sprintf('%s.*', (new Payment)->table));
+            $query = Payment::with(['user', 'projects'])->select(sprintf('%s.*', (new Payment)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -29,14 +29,10 @@ class PaymentsController extends Controller
 
             $table->editColumn('actions', function ($row) {
                 $viewGate      = 'payment_show';
-                $editGate      = 'payment_edit';
-                $deleteGate    = 'payment_delete';
                 $crudRoutePart = 'payments';
 
-                return view('partials.datatablesActions', compact(
+                return view('partials.paymentActions', compact(
                     'viewGate',
-                    'editGate',
-                    'deleteGate',
                     'crudRoutePart',
                     'row'
                 ));
@@ -47,10 +43,6 @@ class PaymentsController extends Controller
             });
             $table->addColumn('user_name', function ($row) {
                 return $row->user ? $row->user->name : '';
-            });
-
-            $table->addColumn('project_title', function ($row) {
-                return $row->project ? $row->project->title : '';
             });
 
             $table->editColumn('payment_orderid', function ($row) {
@@ -68,6 +60,14 @@ class PaymentsController extends Controller
             $table->editColumn('payment_type', function ($row) {
                 return $row->payment_type ? Payment::PAYMENT_TYPE_SELECT[$row->payment_type] : '';
             });
+            $table->editColumn('project', function ($row) {
+                $labels = [];
+                foreach ($row->projects as $project) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $project->title);
+                }
+
+                return implode(' ', $labels);
+            });
 
             $table->rawColumns(['actions', 'placeholder', 'user', 'project']);
 
@@ -83,64 +83,66 @@ class PaymentsController extends Controller
 
         $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $projects = Project::pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $projects = Project::pluck('title', 'id');
 
         return view('admin.payments.create', compact('projects', 'users'));
     }
 
-    public function store(StorePaymentRequest $request)
-    {
-        $payment = Payment::create($request->all());
+    // public function store(StorePaymentRequest $request)
+    // {
+    //     $payment = Payment::create($request->all());
+    //     $payment->projects()->sync($request->input('projects', []));
 
-        return redirect()->route('admin.payments.index');
-    }
+    //     return redirect()->route('admin.payments.index');
+    // }
 
-    public function edit(Payment $payment)
-    {
-        abort_if(Gate::denies('payment_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    // public function edit(Payment $payment)
+    // {
+    //     abort_if(Gate::denies('payment_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+    //     $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $projects = Project::pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
+    //     $projects = Project::pluck('title', 'id');
 
-        $payment->load('user', 'project');
+    //     $payment->load('user', 'projects');
 
-        return view('admin.payments.edit', compact('payment', 'projects', 'users'));
-    }
+    //     return view('admin.payments.edit', compact('payment', 'projects', 'users'));
+    // }
 
-    public function update(UpdatePaymentRequest $request, Payment $payment)
-    {
-        $payment->update($request->all());
+    // public function update(UpdatePaymentRequest $request, Payment $payment)
+    // {
+    //     $payment->update($request->all());
+    //     $payment->projects()->sync($request->input('projects', []));
 
-        return redirect()->route('admin.payments.index');
-    }
+    //     return redirect()->route('admin.payments.index');
+    // }
 
     public function show(Payment $payment)
     {
         abort_if(Gate::denies('payment_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $payment->load('user', 'project');
+        $payment->load('user', 'projects');
 
         return view('admin.payments.show', compact('payment'));
     }
 
-    public function destroy(Payment $payment)
-    {
-        abort_if(Gate::denies('payment_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    // public function destroy(Payment $payment)
+    // {
+    //     abort_if(Gate::denies('payment_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $payment->delete();
+    //     $payment->delete();
 
-        return back();
-    }
+    //     return back();
+    // }
 
-    public function massDestroy(MassDestroyPaymentRequest $request)
-    {
-        $payments = Payment::find(request('ids'));
+    // public function massDestroy(MassDestroyPaymentRequest $request)
+    // {
+    //     $payments = Payment::find(request('ids'));
 
-        foreach ($payments as $payment) {
-            $payment->delete();
-        }
+    //     foreach ($payments as $payment) {
+    //         $payment->delete();
+    //     }
 
-        return response(null, Response::HTTP_NO_CONTENT);
-    }
+    //     return response(null, Response::HTTP_NO_CONTENT);
+    // }
 }

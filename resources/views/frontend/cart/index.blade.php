@@ -130,8 +130,7 @@
 
             <div class="row py-5 p-4 bg-white rounded shadow-sm">
                 <div class="col-lg-12">
-                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">ملخص الطلب</div>
-                    <div class="p-4">
+                    <div class="p-4 ">
 
                         <ul class="list-unstyled mb-4">
                             @php
@@ -144,7 +143,17 @@
                                 <strong class="text-muted">الإجمالي</strong>
                                 <h5 class="font-weight-bold">${{ $total }}</h5>
                             </li>
-                        </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">انتقال الى صفحة الدفع</a>
+                        </ul>
+                        <div class="row justify-content-between">
+                            <a href="{{ route('supporter.payment') }}"
+                                class="btn btn-dark rounded-pill py-3 btn-block  col-4">اتمام عملية الدفع
+                            </a>
+                            <a href="{{ route('supporter.home') }}"
+                                class="btn btn-dark rounded-pill py-3 btn-block  col-4">العوده لتصفح المزيد من
+                                المشاريع الخيريه
+                            </a>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -28,9 +28,6 @@
                         {{ trans('cruds.payment.fields.user') }}
                     </th>
                     <th>
-                        {{ trans('cruds.payment.fields.project') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.payment.fields.payment_orderid') }}
                     </th>
                     <th>
@@ -44,6 +41,9 @@
                     </th>
                     <th>
                         {{ trans('cruds.payment.fields.payment_type') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.payment.fields.project') }}
                     </th>
                     <th>
                         &nbsp;
@@ -103,12 +103,12 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'user_name', name: 'user.name' },
-{ data: 'project_title', name: 'project.title' },
 { data: 'payment_orderid', name: 'payment_orderid' },
 { data: 'donation_num', name: 'donation_num' },
 { data: 'donation', name: 'donation' },
 { data: 'payment_status', name: 'payment_status' },
 { data: 'payment_type', name: 'payment_type' },
+{ data: 'project', name: 'projects.title' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

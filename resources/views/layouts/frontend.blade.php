@@ -37,6 +37,10 @@
             color: black;
             font-weight: 900;
         }
+
+        .supplierlogin a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -72,13 +76,36 @@
                                     src="{{ asset('frontend/img/logo/w_logo.png') }}" alt=""></a>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6">
+                    <div class="col-lg-2 col-sm-6">
                         <div class="text-end">
                             <div class="login"><a href="{{ route('frontend.cart.index') }}"><img
                                         src="{{ asset('frontend/img/shopping-cart.png') }}" alt="">
                                     <div class="cart-counter">@yield('cart-count')</div>
                                 </a>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6">
+                        <div class="text-end">
+                            @auth
+                                <div class="row">
+                                    <i class="c-sidebar-nav-icon fas fa-fw fa-user"></i>
+                                    {{ auth()->user()->name }}
+                                    <a href="#" class="c-sidebar-nav-link"
+                                        onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+                                        <i class="c-sidebar-nav-icon fas fa-fw fa-sign-out-alt">
+
+                                        </i>
+                                        Logout
+                                    </a>
+                                </div>
+                            @else
+                                <div class="supplierlogin"><a href="{{ route('supporter.login') }}">
+                                        تسجيل الدخول
+                                    </a>
+                                </div>
+                            @endauth
+
                         </div>
                     </div>
                 </div>
@@ -92,7 +119,7 @@
 
         @yield('content')
         <!-- newsletter-area -->
-        <section class="newsletter-area">
+        <section class="newsletter-area m-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -222,7 +249,9 @@
     </footer>
     <!-- footer-area-end -->
 
-
+    <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+    </form>
 
     @include('sweetalert::alert')
     <!-- JS here -->
@@ -240,6 +269,8 @@
     <script src="{{ asset('frontend/js/slick.min.js') }}"></script>
     <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+
+
 </body>
 
 </html>

@@ -38,7 +38,9 @@
                         <li class="col-6">
                             <input class="form-control {{ $errors->has('donation_amount') ? 'is-invalid' : '' }}"
                                 type="number" name="donation_amount" id="donation_amount"
-                                value="{{ old('donation_amount', '') }}" placeholder="مبلغ التبرع" required>
+                                value="{{ old('donation_amount', '') }}" placeholder="مبلغ التبرع" required
+                                min="0" pattern="\d*">
+
                         </li>
                         <li class="col-6">
                             <button style="border:inherit; background: inherit; color:black; font-weight: 600"

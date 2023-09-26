@@ -33,14 +33,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.payment.fields.project') }}
-                        </th>
-                        <td>
-                            {{ $payment->project->title ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.payment.fields.payment_orderid') }}
                         </th>
                         <td>
@@ -77,6 +69,16 @@
                         </th>
                         <td>
                             {{ App\Models\Payment::PAYMENT_TYPE_SELECT[$payment->payment_type] ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.payment.fields.project') }}
+                        </th>
+                        <td>
+                            @foreach($payment->projects as $key => $project)
+                                <span class="label label-info">{{ $project->title }}</span>
+                            @endforeach
                         </td>
                     </tr>
                 </tbody>
