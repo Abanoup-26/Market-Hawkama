@@ -21,7 +21,7 @@ class PaymentsController extends Controller
         abort_if(Gate::denies('payment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Payment::with(['user', 'projects'])->select(sprintf('%s.*', (new Payment)->table));
+            $query = Payment::with(['user', 'project'])->select(sprintf('%s.*', (new Payment)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -58,15 +58,10 @@ class PaymentsController extends Controller
                 return $row->payment_status ? Payment::PAYMENT_STATUS_RADIO[$row->payment_status] : '';
             });
             $table->editColumn('payment_type', function ($row) {
-                return $row->payment_type ? Payment::PAYMENT_TYPE_SELECT[$row->payment_type] : '';
+                return $row->payment_type ? Payment::PAYMENT_TYPE_RADIO[$row->payment_type] : '';
             });
             $table->editColumn('project', function ($row) {
-                $labels = [];
-                foreach ($row->projects as $project) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $project->title);
-                }
-
-                return implode(' ', $labels);
+                return $row->project ? $row->project->title : '';
             });
 
             $table->rawColumns(['actions', 'placeholder', 'user', 'project']);
@@ -121,7 +116,7 @@ class PaymentsController extends Controller
     {
         abort_if(Gate::denies('payment_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $payment->load('user', 'projects');
+        $payment->load('user', 'project');
 
         return view('admin.payments.show', compact('payment'));
     }

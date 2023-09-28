@@ -12,7 +12,7 @@ class CreateProjectsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->date('date')->nullable();
-            $table->decimal('collected', 15, 2);
+            $table->decimal('collected', 15, 2)->nullable();
             $table->decimal('goal', 15, 2);
             $table->longText('short_description');
             $table->longText('description');

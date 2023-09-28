@@ -69,7 +69,7 @@
             <div class="container custom-container">
                 <div class="row align-items-center">
                     <div class="col-lg-4 col-sm-6 d-none d-sm-block">
-                    </div>
+                    </div> 
                     <div class="col-lg-4 d-none d-lg-block">
                         <div class="logo text-center">
                             <a href="{{ route('frontend.home') }}"><img
@@ -80,7 +80,7 @@
                         <div class="text-end">
                             <div class="login"><a href="{{ route('frontend.cart.index') }}"><img
                                         src="{{ asset('frontend/img/shopping-cart.png') }}" alt="">
-                                    <div class="cart-counter">@yield('cart-count')</div>
+                                    <div class="cart-counter">{{ session('cart') ? count(session('cart')) : 0 }}</div>
                                 </a>
                             </div>
                         </div>
@@ -151,34 +151,14 @@
         <div class="footer-area">
             <div class="footer-top footer-bg">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <div class="footer-widget wow fadeInUp" data-wow-delay=".4s">
-                                <h4 class="fw-title">روابط سريعة<span>.</span></h4>
-                                <div class="footer-link">
-                                    <ul>
-                                        <li><a href="#">عن الجمعيه</a></li>
-                                        <li><a href="#">صور</a></li>
-                                        <li><a href="#">مشاريعنا</a></li>
-                                        <li><a href="#">تواصل معنا</a></li>
-                                        <li><a href="#">الحوكمة</a></li>
-                                        <li><a href="#">التقارير</a></li>
-                                        <li><a href="#">مشروع دعم</a></li>
-                                        <li><a href="#"> الفعاليات والانشطة</a></li>
-                                        <li><a href="#">المركز الاعلامى</a></li>
-                                        <li><a href="#">الخدمات الالكترونية</a></li>
-                                        <li><a href="#">صوتك مسموع</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row"> 
                         @php
                             $about = \App\Models\About::first();
                         @endphp
                         <div class="col-lg-6 col-md-6">
                             <div class="footer-widget wow fadeInUp" data-wow-delay=".2s">
                                 <div class="fw-logo mb-30">
-                                    <a href="{{ route('frontend.home') }}"><img src="{{ $about->logo->getUrl() }}"
+                                    <a href="{{ route('frontend.home') }}"><img src="{{ $about->logo ? $about->logo->getUrl() : '' }}"
                                             alt=""></a>
                                 </div>
                                 <div class="footer-contact-list mb-30">

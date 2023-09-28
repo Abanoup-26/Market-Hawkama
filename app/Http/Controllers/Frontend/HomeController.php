@@ -12,14 +12,14 @@ class HomeController extends Controller
     public function index()
     {   
         $projects = Project::paginate(9) ;
-        return view('frontend.index' , compact('projects'));
+        return view('frontend.home' , compact('projects'));
     }
 
     public function show( Request $request )
     {
         $project = Project::find($request->id);
         
-        return view('frontend.projects.show', compact('project'));
+        return view('frontend.project-single', compact('project'));
     }
 
 }

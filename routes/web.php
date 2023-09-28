@@ -1,5 +1,8 @@
 <?php
-use App\Http\Controllers\Auth\SupporterLoginController;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));
@@ -7,14 +10,10 @@ Route::get('/home', function () {
 
     return redirect()->route('admin.home');
 });
-// supplier login 
-Route::get('/supporterlogin', [SupporterLoginController::class,'showLoginForm'])->name('supporter.login');
-Route::post('/supporterlogin', [SupporterLoginController::class,'login']);
-Route::post('/logout', [SupporterLoginController::class,'logout'])->name('logout');
 
 Auth::routes();
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth','staff']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');

@@ -54,40 +54,13 @@
                             <input type="number" name="phone_number"
                                 class="form-control{{ $errors->has('phone_number') ? ' is-invalid' : '' }}" required
                                 autofocus placeholder="{{ trans('global.user_phone_number') }}"
-                                value="{{ old('phone_number', null) }}">
+                                value="{{ old('phone_number', $phone_number ?? '') }}">
                             @if ($errors->has('phone_number'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('phone_number') }}
                                 </div>
                             @endif
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-lock fa-fw"></i>
-                                </span>
-                            </div>
-                            <input type="password" name="password"
-                                class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required
-                                placeholder="{{ trans('global.login_password') }}">
-                            @if ($errors->has('password'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('password') }}
-                                </div>
-                            @endif
-                        </div>
-
-                        <div class="input-group mb-4">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-lock fa-fw"></i>
-                                </span>
-                            </div>
-                            <input type="password" name="password_confirmation" class="form-control" required
-                                placeholder="{{ trans('global.login_password_confirmation') }}">
-                        </div>
-
+                        </div> 
                         <button class="btn btn-block btn-primary">
                             {{ trans('global.register') }}
                         </button>

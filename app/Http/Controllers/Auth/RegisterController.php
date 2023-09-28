@@ -51,27 +51,27 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone_number' => ['required','string','regex:/^01[0-9]{9}$/','unique:users,phone_number', ],
+            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'], 
+            'phone_number' => ['required','string',config('panel.phone_format'),'unique:users,phone_number', ],
         ]);
     }
 
-         /**
+        /**
           * Create a new user instance after a valid registration.
           *
           * @param  array  $data
           * @return \App\User
           */
-         protected function create(array $data)
-         {
-             return User::create([
-                 'name'     => $data['name'],
-                 'email'    => $data['email'],
-                 'password' => Hash::make($data['password']),
-                 'approved' => 1 ,
-                 'user_type' =>'supporter',
-                 'phone_number' => $data['phone_number'],
-             ]);
-         }
+        protected function create(array $data)
+        {
+            $user = User::create([
+                'name'     => $data['name'],
+                'email'    => $data['email'], 
+                'approved' => 1 ,
+                'user_type' =>'supporter',
+                'phone_number' => $data['phone_number'],
+            ]);
+
+            return $user;
+        }
 }

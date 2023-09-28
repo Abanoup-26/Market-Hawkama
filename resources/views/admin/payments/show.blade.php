@@ -68,7 +68,7 @@
                             {{ trans('cruds.payment.fields.payment_type') }}
                         </th>
                         <td>
-                            {{ App\Models\Payment::PAYMENT_TYPE_SELECT[$payment->payment_type] ?? '' }}
+                            {{ App\Models\Payment::PAYMENT_TYPE_RADIO[$payment->payment_type] ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -76,9 +76,7 @@
                             {{ trans('cruds.payment.fields.project') }}
                         </th>
                         <td>
-                            @foreach($payment->projects as $key => $project)
-                                <span class="label label-info">{{ $project->title }}</span>
-                            @endforeach
+                            {{ $payment->project ? $payment->project->title : '' }}
                         </td>
                     </tr>
                 </tbody>

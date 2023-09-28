@@ -1,7 +1,10 @@
+@php
+    $project_image = isset($project->image[0]) ? $project->image[0]->getUrl('preview') : asset('frontend/img/project/project_img01.jpg');  
+@endphp
 <div class="col-lg-4 col-md-6 col-sm-10">
     <div class="project-item mb-30">
         <div class="project-thumb">
-            <a href="#"><img src="{{ asset('frontend/img/project/project_img01.jpg') }}" alt=""></a>
+            <a href="#"><img src="{{ $project_image }}" alt=""></a>
             <a href="#" class="tag">الهدف ريال</a>
         </div>
         <div class="project-content">

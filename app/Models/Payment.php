@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
 
 class Payment extends Model
 {
@@ -14,13 +15,23 @@ class Payment extends Model
 
     public $table = 'payments';
 
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('completed', function (Builder $builder) {
+            $builder->where('completed', 1);
+        });
+    }
+
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    public const PAYMENT_TYPE_SELECT = [
+    public const PAYMENT_TYPE_RADIO = [
         'cash'   => 'Cash',
         'credit' => 'Credit',
     ];
@@ -32,6 +43,7 @@ class Payment extends Model
 
     protected $fillable = [
         'user_id',
+        'project_id',
         'payment_orderid',
         'donation_num',
         'donation',
@@ -53,9 +65,8 @@ class Payment extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function projects()
+    public function project()
     {
-        return $this->belongsToMany(Project::class, 'payment_project')
-            ->withPivot('donation_amount'); 
+        return $this->belongsTo(Project::class, 'project_id');
     }
 }

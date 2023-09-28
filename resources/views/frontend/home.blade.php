@@ -1,11 +1,4 @@
 @extends('layouts.frontend')
-@php
-    $cartprojects = session('cart', []);
-    $cart_count = count($cartprojects);
-@endphp
-@section('cart-count')
-    {{ $cart_count }}
-@endsection 
 @section('content')
     <!-- breadcrumb-area -->
     <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/breadcrumb_bg.jpg') }}">
@@ -26,6 +19,7 @@
         </div>
     </section>
     <!-- breadcrumb-area-end -->
+
     <!-- project-area -->
     <section class="project-area pt-100 pb-100">
         <div class="container">

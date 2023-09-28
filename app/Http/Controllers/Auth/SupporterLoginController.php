@@ -20,22 +20,23 @@ class SupporterLoginController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-            'phone_number' => 'required|regex:/[0-9]{11}/|digits:11',
+            'phone_number' => 'required|'.config('panel.phone_format'),
         ]);
 
+        $phone_number = $request->get('phone_number');
+
         // Find the user by phone number
-        $user = User::where('phone_number', $request->get('phone_number'))->first();
+        $user = User::where('phone_number', $phone_number)->first();
 
         // Check if the user exists
-        if (!$user) {
-            session()->flash('user_not_found', "The Phone number isn't exist You have to register first");
-        return redirect()->back()->withInput();
+        if (!$user) { 
+            return view('auth.register',compact('phone_number'));
         }
 
         // Authenticate the user
         Auth::login($user);
 
-        return redirect()->route('supporter.home');
+        return redirect()->route('frontend.cart.index');
     }
 
     public function logout()

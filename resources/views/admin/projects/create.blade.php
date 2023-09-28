@@ -28,17 +28,7 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.project.fields.date_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="collected">{{ trans('cruds.project.fields.collected') }}</label>
-                <input class="form-control {{ $errors->has('collected') ? 'is-invalid' : '' }}" type="number" name="collected" id="collected" value="{{ old('collected', '') }}" step="0.01" required>
-                @if($errors->has('collected'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('collected') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.project.fields.collected_helper') }}</span>
-            </div>
+            </div> 
             <div class="form-group">
                 <label class="required" for="goal">{{ trans('cruds.project.fields.goal') }}</label>
                 <input class="form-control {{ $errors->has('goal') ? 'is-invalid' : '' }}" type="number" name="goal" id="goal" value="{{ old('goal', '') }}" step="0.01" required>
