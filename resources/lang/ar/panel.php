@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'site_title' => 'مشروعات دعم',
+    'site_title' => 'مشاريع دعم',
 
 ];

@@ -1,4 +1,4 @@
-@extends('layouts.frontend') 
+@extends('layouts.frontend')
 @section('content')
     <!-- breadcrumb-area -->
     <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/breadcrumb_bg.jpg') }}">
@@ -51,7 +51,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(session('cart'))
+                                @if (session('cart'))
                                     @foreach (session('cart') as $key => $value)
                                         <tr class="Project-{{ $key }}">
                                             <th scope="row" class="border-0 " style="width:40%;">
@@ -63,8 +63,8 @@
                                                             $img = asset('frontend/img/blank.jpg');
                                                         }
                                                     @endphp
-                                                    <img src="{{ $img }}" alt="" width="70"
-                                                        class="img-fluid rounded shadow-sm m-3">
+                                                    <img src="{{ $img }}" alt="" width="100"
+                                                        height="150" class="img-fluid rounded shadow-sm m-3">
                                                     <div class="ml-3 d-inline-block align-middle">
                                                         <h5 class="mb-0"> <a href="#"
                                                                 class="text-dark d-inline-block align-middle">{{ $value['title'] }}</a>
@@ -72,10 +72,11 @@
                                                     </div>
                                                 </div>
                                             </th>
-                                            <td class="border-0 align-middle text-center"><strong>${{ $value['goal'] }}</strong>
+                                            <td class="border-0 align-middle text-center"><strong>SAR
+                                                    &nbsp;{{ number_format($value['goal']) }}</strong>
                                             </td>
                                             <td class="border-0 align-middle text-center">
-                                                <strong>${{ $value['collected'] }}</strong>
+                                                <strong>SAR &nbsp;{{ number_format($value['collected']) }}</strong>
                                             </td>
                                             @if ($value['donation-amount'] == null)
                                                 <li class="col-6">
@@ -106,7 +107,8 @@
                                                 </td>
                                             @else
                                                 <td class="border-0 align-middle text-center">
-                                                    <strong>${{ $value['donation-amount'] }}</strong>
+                                                    <strong>SAR
+                                                        &nbsp;{{ number_format($value['donation-amount']) }}</strong>
                                                 </td>
                                             @endif
 
@@ -121,14 +123,14 @@
                     </div>
                     <!-- End -->
 
-                    
+
                     <form action="{{ route('frontend.payment') }}" method="POST">
                         @csrf
 
                         <ul class="list-unstyled mb-4">
                             @php
                                 $total = 0;
-                                if(session('cart')){
+                                if (session('cart')) {
                                     foreach (session('cart') as $key => $value) {
                                         $total += $value['donation-amount'];
                                     }
@@ -139,29 +141,30 @@
                                 <h5 class="font-weight-bold">${{ $total }}</h5>
                             </li>
                         </ul>
-                            
+
                         @auth
                             <div class="row mb-5">
                                 <div class="form-group col-md-3">
                                     <label class="required">{{ trans('cruds.payment.fields.payment_type') }}</label>
-                                    @foreach(App\Models\Payment::PAYMENT_TYPE_RADIO as $key => $label)
+                                    @foreach (App\Models\Payment::PAYMENT_TYPE_RADIO as $key => $label)
                                         <div class="form-check {{ $errors->has('payment_type') ? 'is-invalid' : '' }}">
-                                            <input class="form-check-input" type="radio" id="payment_type_{{ $key }}" name="payment_type" value="{{ $key }}" {{ old('payment_type', 'cash') === (string) $key ? 'checked' : '' }} required>
-                                            <label class="form-check-label" for="payment_type_{{ $key }}">{{ $label }}</label>
+                                            <input class="form-check-input" type="radio"
+                                                id="payment_type_{{ $key }}" name="payment_type"
+                                                value="{{ $key }}"
+                                                {{ old('payment_type', 'cash') === (string) $key ? 'checked' : '' }} required>
+                                            <label class="form-check-label"
+                                                for="payment_type_{{ $key }}">{{ $label }}</label>
                                         </div>
-                                    @endforeach 
+                                    @endforeach
                                     <span class="help-block">{{ trans('cruds.payment.fields.payment_type_helper') }}</span>
                                 </div>
                             </div>
-                        
                         @else
-
                         @endauth
 
-                        <div class="row justify-content-between"> 
-                            @auth 
-                                <button type="submit"
-                                    class="btn btn-dark rounded-pill py-3 btn-block  col-4">اتمام عملية الدفع
+                        <div class="row justify-content-between">
+                            @auth
+                                <button type="submit" class="btn btn-dark rounded-pill py-3 btn-block  col-4">اتمام عملية الدفع
                                 </button>
                             @else
                                 <a href="{{ route('supporter.login') }}"
@@ -176,7 +179,7 @@
                     </form>
 
                 </div>
-            </div> 
+            </div>
 
         </div>
     </div>
