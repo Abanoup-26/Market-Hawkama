@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Auditable;
 use Carbon\Carbon;
 use DateTimeInterface;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -90,15 +91,25 @@ class Project extends Model implements HasMedia
     {
         if ($this->goal > 0) {
             // Calculate the rate 
-            $rate = ($this->collected / $this->goal) * 100;  
+            $rate = ($this->collected / $this->goal) * 100;
             // Ensure the rate is within the range 0 to 100
             $rate = min(100, max(0, $rate));
-            
+
             return round($rate, 2); // Round the percentage to 2 decimal places
         }
-        
-        return 0; 
+
+        return 0;
     }
 
-    
+    public function scopeNewestFirst(Builder $query)
+    {
+        // CASE statement to assign a value of 1 for fully funded projects (collected = goal) and 0 for others.
+        // order the projects first by this calculated value then by created_at.
+        return $query->orderByRaw('
+        CASE
+            WHEN collected = goal THEN 1
+            ELSE 0
+        END ASC, created_at DESC
+    ');
+    }
 }

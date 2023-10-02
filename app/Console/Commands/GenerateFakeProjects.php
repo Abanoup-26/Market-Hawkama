@@ -17,7 +17,7 @@ class GenerateFakeProjects extends Command
         $faker = FakerFactory::create();
 
         // You can specify the number of fake projects you want to create here
-        $numberOfProjects = 15;
+        $numberOfProjects = 12;
 
         for ($i = 0; $i < $numberOfProjects; $i++) {
             Project::create([

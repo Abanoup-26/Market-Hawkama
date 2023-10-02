@@ -40,6 +40,7 @@
 
         .supplierlogin a:hover {
             text-decoration: underline;
+            color: red;
         }
     </style>
 </head>
@@ -69,16 +70,16 @@
             <div class="container custom-container">
                 <div class="row align-items-center">
                     <div class="col-lg-4 col-sm-6 d-none d-sm-block">
-                    </div> 
+                    </div>
                     <div class="col-lg-4 d-none d-lg-block">
                         <div class="logo text-center">
                             <a href="{{ route('frontend.home') }}"><img
                                     src="{{ asset('frontend/img/logo/w_logo.png') }}" alt=""></a>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-sm-6">
+                    <div class="col-lg-2 col-sm-6 col-xs-8 p-3">
                         <div class="text-end">
-                            <div class="login"><a href="{{ route('frontend.cart.index') }}"><img
+                            <div class="login "><a href="{{ route('frontend.cart.index') }}"><img
                                         src="{{ asset('frontend/img/shopping-cart.png') }}" alt="">
                                     <div class="cart-counter">{{ session('cart') ? count(session('cart')) : 0 }}</div>
                                 </a>
@@ -151,15 +152,15 @@
         <div class="footer-area">
             <div class="footer-top footer-bg">
                 <div class="container">
-                    <div class="row"> 
+                    <div class="row">
                         @php
                             $about = \App\Models\About::first();
                         @endphp
                         <div class="col-lg-6 col-md-6">
                             <div class="footer-widget wow fadeInUp" data-wow-delay=".2s">
                                 <div class="fw-logo mb-30">
-                                    <a href="{{ route('frontend.home') }}"><img src="{{ $about->logo ? $about->logo->getUrl() : '' }}"
-                                            alt=""></a>
+                                    <a href="{{ route('frontend.home') }}"><img
+                                            src="{{ $about->logo ? $about->logo->getUrl() : '' }}" alt=""></a>
                                 </div>
                                 <div class="footer-contact-list mb-30">
                                     <ul>

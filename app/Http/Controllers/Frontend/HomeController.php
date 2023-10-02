@@ -10,16 +10,16 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index()
-    {   
-        $projects = Project::paginate(9) ;
-        return view('frontend.home' , compact('projects'));
+    {
+        $projects = Project::newestFirst()->paginate(9);
+
+        return view('frontend.home', compact('projects'));
     }
 
-    public function show( Request $request )
+    public function show(Request $request)
     {
         $project = Project::find($request->id);
-        
+
         return view('frontend.project-single', compact('project'));
     }
-
 }

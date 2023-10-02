@@ -22,8 +22,8 @@
 
     <!-- project-area -->
     <section class="project-area pt-100 pb-100">
-        <div class="container">
-            <div class="row justify-content-center">
+        <div class="container text-center">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-3">
                 <!---for  Projects loop-->
                 @foreach ($projects as $project)
                     @include('partials.project')
