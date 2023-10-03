@@ -6,7 +6,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="title"> مشاريع دعم</h2>
+                        <h2 class="title"> متجر دعم</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('frontend.home') }}">الرئيسية</a></li>

@@ -1,12 +1,13 @@
-<!doctype html>
-<html class="no-js">
+<!DOCTYPE html>
+<html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>جمعية دعم لرعاية الارامل والمطلقات وابنائهن</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 
@@ -43,6 +44,7 @@
             color: red;
         }
     </style>
+    @yield('styles')
 </head>
 
 <body>
@@ -65,7 +67,7 @@
     <!-- Scroll-top-end-->
 
     <!-- header-area -->
-    <header class="transparent-header header-style-two header-style-three inner-header">
+    <header class=" transparent-header header-style-two header-style-three inner-header">
         <div class="header-top-wrap">
             <div class="container custom-container">
                 <div class="row align-items-center">
@@ -81,7 +83,8 @@
                         <div class="text-end">
                             <div class="login "><a href="{{ route('frontend.cart.index') }}"><img
                                         src="{{ asset('frontend/img/shopping-cart.png') }}" alt="">
-                                    <div class="cart-counter">{{ session('cart') ? count(session('cart')) : 0 }}</div>
+                                    <div class="cart-counter">{{ session('cart') ? count(session('cart')) : 0 }}
+                                    </div>
                                 </a>
                             </div>
                         </div>
@@ -156,7 +159,7 @@
                         @php
                             $about = \App\Models\About::first();
                         @endphp
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-lg-12 col-md-7">
                             <div class="footer-widget wow fadeInUp" data-wow-delay=".2s">
                                 <div class="fw-logo mb-30">
                                     <a href="{{ route('frontend.home') }}"><img
@@ -197,10 +200,12 @@
                                 </div>
                                 <div class="footer-social">
                                     <ul>
-                                        <li><a href="{{ $about->twitter }}"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="{{ $about->twitter }}"><i class="fab fa-twitter"></i></a>
+                                        </li>
                                         <li><a href="{{ $about->instagram }}"><i class="fab fa-instagram"></i></a>
                                         </li>
-                                        <li><a href="{{ $about->whatsapp }}"><i class="fab fa-whatsapp"></i></a></li>
+                                        <li><a href="{{ $about->whatsapp }}"><i class="fab fa-whatsapp"></i></a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

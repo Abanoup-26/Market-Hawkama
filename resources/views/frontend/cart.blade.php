@@ -1,4 +1,5 @@
 @extends('layouts.frontend')
+
 @section('content')
     <!-- breadcrumb-area -->
     <section class="breadcrumb-area breadcrumb-bg" data-background="{{ asset('frontend/img/bg/breadcrumb_bg.jpg') }}">
@@ -29,7 +30,7 @@
 
                     <!-- Shopping cart table -->
                     <div class="table-responsive">
-                        <table class="table border">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col" class="border-0 bg-light text-center">
@@ -122,68 +123,74 @@
                         </table>
                     </div>
                     <!-- End -->
+                </div>
+            </div>
 
+            <div class="row py-5 p-4 bg-white rounded shadow-sm">
 
+                <div class="container">
                     <form action="{{ route('frontend.payment') }}" method="POST">
                         @csrf
-
-                        <ul class="list-unstyled mb-4">
-                            @php
-                                $total = 0;
-                                if (session('cart')) {
-                                    foreach (session('cart') as $key => $value) {
-                                        $total += $value['donation-amount'];
+                        <div class="p-4">
+                            <ul class="list-unstyled mb-4">
+                                @php
+                                    $total = 0;
+                                    if (session('cart')) {
+                                        foreach (session('cart') as $key => $value) {
+                                            $total += $value['donation-amount'];
+                                        }
                                     }
-                                }
-                            @endphp
-                            <li class="d-flex justify-content-between py-3 border-bottom">
-                                <strong class="text-muted">الإجمالي</strong>
-                                <h5 class="font-weight-bold">${{ $total }}</h5>
-                            </li>
-                        </ul>
+                                @endphp
+                                <li class="d-flex justify-content-between py-3 border-bottom">
+                                    <strong class="text-muted">الإجمالي</strong>
+                                    <h5 class="font-weight-bold">SAR &nbsp;{{ number_format($total) }}</h5>
+                                </li>
+                            </ul>
+                            @auth
+                                <div class="row mb-5">
+                                    <div class="form-group ">
+                                        <label
+                                            class="required fs-3 fw-bold mb-3">{{ trans('cruds.payment.fields.payment_type') }}</label>
+                                        @foreach (App\Models\Payment::PAYMENT_TYPE_RADIO as $key => $label)
+                                            <div class="form-check {{ $errors->has('payment_type') ? 'is-invalid' : '' }}">
+                                                <input class="form-check-input" type="radio"
+                                                    id="payment_type_{{ $key }}" name="payment_type"
+                                                    value="{{ $key }}"
+                                                    {{ old('payment_type', 'cash') === (string) $key ? 'checked' : '' }}
+                                                    required>
+                                                <label class="form-check-label fs-5"
+                                                    for="payment_type_{{ $key }}">{{ $label }}</label>
+                                            </div>
+                                        @endforeach
+                                        <span class="help-block">{{ trans('cruds.payment.fields.payment_type_helper') }}</span>
+                                    </div>
+                                </div>
+                            @else
+                            @endauth
 
-                        @auth
-                            <div class="row mb-5">
-                                <div class="form-group col-md-3">
-                                    <label class="required">{{ trans('cruds.payment.fields.payment_type') }}</label>
-                                    @foreach (App\Models\Payment::PAYMENT_TYPE_RADIO as $key => $label)
-                                        <div class="form-check {{ $errors->has('payment_type') ? 'is-invalid' : '' }}">
-                                            <input class="form-check-input" type="radio"
-                                                id="payment_type_{{ $key }}" name="payment_type"
-                                                value="{{ $key }}"
-                                                {{ old('payment_type', 'cash') === (string) $key ? 'checked' : '' }} required>
-                                            <label class="form-check-label"
-                                                for="payment_type_{{ $key }}">{{ $label }}</label>
-                                        </div>
-                                    @endforeach
-                                    <span class="help-block">{{ trans('cruds.payment.fields.payment_type_helper') }}</span>
+                            <div class="row row-cols-1 row-cols-md-2 ">
+                                @auth
+                                    <div class="col mb-2">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block rounded-pill">اتمام عملية
+                                            الدفع</button>
+                                    </div>
+                                @else
+                                    <div class="col mb-2">
+                                        <a href="{{ route('supporter.login') }}"
+                                            class="btn btn-dark btn-lg btn-block rounded-pill">اتمام عملية الدفع</a>
+                                    </div>
+                                @endauth
+                                <div class="col mb-2">
+                                    <a href="{{ route('frontend.home') }}"
+                                        class="btn btn-dark btn-lg btn-block rounded-pill">العوده لتصفح المزيد من المشاريع
+                                        الخيريه</a>
                                 </div>
                             </div>
-                        @else
-                        @endauth
-
-                        <div class="row justify-content-between">
-                            @auth
-                                <button type="submit" class="btn btn-dark rounded-pill py-3 btn-block  col-4">اتمام عملية الدفع
-                                </button>
-                            @else
-                                <a href="{{ route('supporter.login') }}"
-                                    class="btn btn-dark rounded-pill py-3 btn-block  col-4">اتمام عملية الدفع
-                                </a>
-                            @endauth
-                            <a href="{{ route('frontend.home') }}"
-                                class="btn btn-dark rounded-pill py-3 btn-block  col-4">العوده لتصفح المزيد من
-                                المشاريع الخيريه
-                            </a>
                         </div>
                     </form>
-
                 </div>
             </div>
 
         </div>
     </div>
-
-
-    <!-- category-area-end -->
 @endsection
